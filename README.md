@@ -1,5 +1,6 @@
 # How to run assignment
-- Open to VSC
+- Clone repository
+- Open repository in VSC
 - Click on the primesMultithread.java file 
 - Right click on the code of primesMultithread.java file
 - Click "Run Code"
