@@ -19,11 +19,11 @@ iterations.
 
 
     In regard to experimental evaluation, I tested my program with the Trial Division and Miller-Rabin test methods for finding prime numbers. The Trail Division
-method checks if a number is divisible by any whole number up to its square root. If any division is without remainder, it's not prime. Meanwhile, for the 
-Miller-Rabin method, it is a probabilistic primality test based on modular exponentiation. It checks if a random base raised to certain powers yields specific 
-modulo results consistent with primality. This method also involves conducting the test for a given number k number of times. Plus, it is said that the Miller-
-Rabin method is better for figuring out whether a large number is prime. With k=5, I compared the time for Trial Division and Miller-Rabin test and for the results 
-are below. 
+method checks if a number is divisible by any whole number up to its square root. If any division is without remainder, it's not prime. With that said, it has a 
+runtime of O(sqrt(n)). Meanwhile, for the Miller-Rabin method, it is a probabilistic primality test based on modular exponentiation. It checks if a random base 
+raised to certain powers yields specific modulo results consistent with primality. This method also involves conducting the test for a given number k number of 
+times. Plus, it is said that the Miller-Rabin method is better for figuring out whether a large number is prime. Overall, in regard to the Miller-Rabin test, it 
+has a runtime of O(k * log^2(n)). With k=5, I compared the time for Trial Division and Miller-Rabin test and for the results are below. 
 
     Trail Division: 
         Time taken for the threads to process: 14330 ms
@@ -32,5 +32,5 @@ are below.
         Time taken for the threads to process: 823188 ms
 
 
-Based on the results, Trail Division is better for multithreading. I believe this is because Miller-Rabin has to repeat it k number of tests for every number in 
-each thread, resulting in more time needed than if this test was performed for a single number to check if it was prime.
+Based on the results, Trail Division is better for multithreading in terms of runtime. This is likely because Miller-Rabin has to repeat the test k number of times
+for every number in each thread, resulting in more time needed than if this test was performed for a single number to check if it was prime.
