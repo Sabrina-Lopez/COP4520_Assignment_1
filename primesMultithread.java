@@ -11,7 +11,7 @@ public class primesMultithread {
         // Declare the maximum value to find primes up to from 0
         int limit = (int) Math.pow(10, 8);
 
-        // Declare threads and the array of classes with the number of desired threads
+        // Declare threads and the array of objects with the number of desired threads
         Thread[] threads = new Thread[NUM_THREADS];
         PrimeInfo[] primeInfoTasks = new PrimeInfo[NUM_THREADS];
 
@@ -39,8 +39,8 @@ public class primesMultithread {
                     end = limit;
                 }
 
-                // Initialize the current class in the array to contain the information regarding the current set of values, give the
-                    // class to its respective current thread, and start the thread
+                // Initialize the current object in the array to contain the information regarding the current set of values, give the
+                    // object to its respective current thread, and start the thread
                 primeInfoTasks[i] = new PrimeInfo(start, end);
                 threads[i] = new Thread(primeInfoTasks[i]);
                 threads[i].start();
@@ -63,12 +63,12 @@ public class primesMultithread {
                     // Get the current thread
                     threads[i].join();
 
-                    // Get the sum of the current thread's class's getSum function
+                    // Get the sum of the current thread's object's getSum function
                     sum += primeInfoTasks[i].getSum();
 
-                    // Get the totle number of primes of the current thread's class's getPrimeCount function
+                    // Get the totle number of primes of the current thread's object's getPrimeCount function
                     totalPrimeCount += primeInfoTasks[i].getPrimeCount();
-                    // Get the top 10 primes of the current thread's class's getTopPrimes function
+                    // Get the top 10 primes of the current thread's object's getTopPrimes function
                     topPrimes.addAll(primeInfoTasks[i].getTopPrimes());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -138,9 +138,9 @@ public class primesMultithread {
             for (int i = 2; i <= Math.sqrt(number); i++) {
                 if (number % i == 0) {
                     return false;
-                }
             }
-
+            }
+        
             return true;
         }
 

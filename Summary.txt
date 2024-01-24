@@ -1,0 +1,36 @@
+The approach to solving this assignment and experimental evaluation is the following:
+
+    The program partitions the range of numbers (up to 10^8) into segments and assigns each segment to a separate thread for parallel processing.
+It then creates 8 threads (NUM_THREADS) and assigns each thread a PrimeInfo object containing its designated segment's start and end values.
+As a result, each thread concurrently executes the run() method in its PrimeInfo object, checking for prime numbers within its assigned range using 
+the isPrime() function, which contains the Trial Division primality test. The main thread waits for all threads to finish, gathers the partial 
+results (sum of primes, prime count, and top 10 primes) from each thread, and combines them into the final results. With the information combined 
+into the main thread, the overall results can be written to an external file.
+
+    In regard to the correctness of the approach , the isPrime() function correctly identifies prime numbers using a standard primality test. 
+Additionally, the main thread ensures correct result aggregation by waiting for all threads to finish using join() before collecting partial results. 
+The collected partial results are then used in the calculations for total prime count, sum of primes, and top 10 primes are accurate based on the collected 
+partial results.
+
+    In regard to efficiency of the approach, dividing the work among multiple threads enables parallel processing, potentially improving performance on 
+multi-core systems. This is especially true through the division of the range of numbers from 0 to 10^8 into segments, avoiding thread contention and overhead 
+associated with fine-grained task division. Plus, the isPrime() function only checks divisibility up to the square root of the number, reducing unnecessary 
+iterations.
+
+
+    In regard to experimental evaluation, I tested my program with the Trial Division and Miller-Rabin test methods for finding prime numbers. The Trail Division
+method checks if a number is divisible by any whole number up to its square root. If any division is without remainder, it's not prime. Meanwhile, for the 
+Miller-Rabin method, it is a probabilistic primality test based on modular exponentiation. It checks if a random base raised to certain powers yields specific 
+modulo results consistent with primality. This method also involves conducting the test for a given number k number of times. Plus, it is said that the Miller-
+Rabin method is better for figuring out whether a large number is prime. With k=5, I compared the time for Trial Division and Miller-Rabin test and for the results 
+are below. 
+
+    Trail Division: 
+        Time taken for the threads to process: 14330 ms
+
+    Miller-Rabin:
+        Time taken for the threads to process: 823188 ms
+
+
+Based on the results, Trail Division is better for multithreading. I believe this is because Miller-Rabin has to repeat it k number of tests for every number in 
+each thread, resulting in more time needed than if this test was performed for a single number to check if it was prime.

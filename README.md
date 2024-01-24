@@ -1,9 +1,9 @@
 # How to run assignment
-- Clone repository
-- Open repository in VSC
-- Click on the primesMultithread.java file 
-- Right click on the code of primesMultithread.java file
-- Click "Run Code"
+- Clone repository.
+- Open Command Prompt.
+- Traverse local device to the repository's directory.
+- In Command Prompt, write `java primesMultithread.java` and hit Enter.
+- The external file with the results should be in the repository folder.
 
 # Results in chronological order
 - Time taken for the threads to run
