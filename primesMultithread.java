@@ -1,11 +1,14 @@
 import java.io.FileWriter;
 import java.io.IOException;
+// import java.math.BigInteger; // THIS IS FOR TESTING WITH MILLER-RABIN
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+// import java.util.Random; // THIS IS FOR TESTING WITH MILLER-RABIN
 
 public class primesMultithread {
     private static final int NUM_THREADS = 8;
+    // private static final int MILLER_RABIN_ITERATIONS = 5; // THIS IS FOR TESTING WITH MILLER-RABIN
 
     public static void main(String[] args) {
         // Declare the maximum value to find primes up to from 0
@@ -32,7 +35,7 @@ public class primesMultithread {
             // For each thread
             for (int i = 0; i < NUM_THREADS; i++) {
 
-                // If the program has eached the last thread
+                // If the program has reached the last thread
                 if (i == NUM_THREADS - 1) {
 
                     // The end is the limit
@@ -138,16 +141,61 @@ public class primesMultithread {
             for (int i = 2; i <= Math.sqrt(number); i++) {
                 if (number % i == 0) {
                     return false;
+                }
             }
-            }
-        
+
             return true;
         }
+
+        /* THIS IS FOR TESTING WITH MILLER-RABIN
+        public boolean isPrime(BigInteger number) {
+            BigInteger TWO = BigInteger.valueOf(2);
+            BigInteger THREE = BigInteger.valueOf(3);
+
+            if (number.compareTo(THREE) < 0) {
+                return number.equals(TWO); // 2 is prime, others less than 3 are not
+            }
+
+            // Ensure n is odd
+            if (number.mod(TWO).equals(BigInteger.ZERO)) {
+                return false;
+            }
+
+            BigInteger d = number.subtract(BigInteger.ONE);
+            int s = d.getLowestSetBit();
+            d = d.shiftRight(s);
+
+            for (int i = 0; i < MILLER_RABIN_ITERATIONS; i++) {
+                BigInteger a = BigInteger.probablePrime(number.bitLength(), new Random());
+                BigInteger x = a.modPow(d, number);
+
+                if (x.equals(BigInteger.ONE) || x.equals(number.subtract(BigInteger.ONE))) {
+                    continue;
+                }
+
+                for (int r = 1; r < s; r++) {
+                    x = x.modPow(TWO, number);
+                    if (x.equals(BigInteger.ONE)) {
+                        return false;
+                    }
+                    if (x.equals(number.subtract(BigInteger.ONE))) {
+                        break;
+                    }
+                }
+
+                if (!x.equals(number.subtract(BigInteger.ONE))) {
+                    return false;
+                }
+            }
+
+            return true;
+        }*/
 
         // Thread's function to get the necessary output information for the current segment of values between start and end
         @Override
         public void run() {
             for (int i = start; i <= end; i++) {
+                // if (isPrime(BigInteger.valueOf(i))) { // THIS IS FOR TESTING WITH MILER-RABIN
                 if (isPrime(i)) {
                     sum += i;
                     primeCount++;
