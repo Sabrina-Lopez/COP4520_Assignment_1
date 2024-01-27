@@ -82,6 +82,8 @@ public class primesMultithread {
             Collections.sort(topPrimes, Collections.reverseOrder());
             topPrimes = topPrimes.subList(0, Math.min(topPrimes.size(), 10));
 
+            Collections.reverse(topPrimes);
+
             // Get the end time right after the threads finish processing
             long endTime = System.currentTimeMillis();
 
@@ -101,6 +103,19 @@ public class primesMultithread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // Function to reserve an ArrayList
+    public ArrayList<Integer> reverseArrayList(ArrayList<Integer> alist)
+    {
+        for (int i = 0; i < alist.size() / 2; i++) {
+            Integer temp = alist.get(i);
+            alist.set(i, alist.get(alist.size() - i - 1));
+            alist.set(alist.size() - i - 1, temp);
+        }
+ 
+        // Return the reversed arraylist
+        return alist;
     }
 
     // Create class to handle run() and other necessary functions to get the desired outputted information
